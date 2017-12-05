@@ -101,7 +101,7 @@ public class Main {
         // Get every possible combination of the number
         PermutationEngine engine = new PermutationEngine(tempStr);
         mainObj.setPossibleMissingNumbers(engine.getPermutations());
-        mainObj.getPossibleMissingNumbers()
+        mainObj.getPossibleMissingNumbers();
 
 //        String[] missingNumberStrings = {input1, input2, input3, input4};
 //        for (String tempStr : missingNumberStrings){
