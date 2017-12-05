@@ -1,17 +1,75 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Main {
 
-    private String missingNumberString;
+    private ArrayList<String> missingNumberStrings;
+    private ArrayList<Integer> numbersInString, possibleMissingNumbers;
     private int lowestNumber, highestNumber;
 
     public ArrayList<Integer> getPossibleMissingNumbers() {
         return possibleMissingNumbers;
     }
 
-    private ArrayList<Integer> possibleMissingNumbers;
+
+    public int findThatShizzzzzz(){
+        int majorCoutner = 0;
+        while (majorCoutner < 5){
+            majorCoutner++;
+            System.out.println("Numbers in string: " + Arrays.toString(numbersInString.toArray()));
+            System.out.println("Missing number strings: " + Arrays.toString(missingNumberStrings.toArray()));
+            System.out.println("Possible missing numbers: " + Arrays.toString(possibleMissingNumbers.toArray()));
+            System.out.println();
+
+            // Loop from biggest number to smallest
+            for (int i = numbersInString.size()-1; i > 0; i--){
+                String numberAsString = numbersInString.get(i).toString();
+
+                // If number is in possible missing numbers, don't consider removing
+                boolean skip = false;
+                for (int j = 0; j < possibleMissingNumbers.size(); j++){
+                    if (numberAsString.equals(possibleMissingNumbers.get(j).toString())){
+                        skip = true;
+                    }
+                }
+                if (skip){
+                    System.out.println("WE SKIPPPPIN");
+                    continue;
+                }
+
+                // If you find the number in the strings, add one to counter
+                int counter = 0;
+                int stringIndex = -1;
+                for (int j = 0; j < missingNumberStrings.size(); j++){
+                    for (int k = 0; k < missingNumberStrings.get(j).length() - numberAsString.length();
+                         k++){
+                        if (numberAsString.equals(missingNumberStrings.get(j).substring(k, k +
+                                numberAsString.length()))){
+                            stringIndex = j;
+                            counter++;
+                            System.out.println("Counter is going up to : " + counter + " for " + numberAsString);
+                        }
+                    }
+                }
+
+                // Only one instance of number found
+                if (counter == 1){
+                    System.out.println("WE IN HERRRRRRRRRRRRRRRRRRRRRRRRRRREEEEEEEEEEEEE");
+                    String leftStr;
+                    String rightStr;
+                    String splitString = missingNumberStrings.get(stringIndex);
+                    leftStr = splitString.substring(0, splitString.indexOf(numberAsString));
+                    rightStr = splitString.substring(splitString.indexOf(numberAsString) + numberAsString.length());
+                    missingNumberStrings.add(leftStr);
+                    missingNumberStrings.add(rightStr);
+                    missingNumberStrings.remove(splitString);
+                    numbersInString.remove(Integer.parseInt(numberAsString));
+                }
+            }
+        }
+        return possibleMissingNumbers.get(0);
+    }
 
     private ArrayList<Integer> getMissingDigits(String missingNumberString){
 
@@ -30,6 +88,7 @@ public class Main {
         // Build a string of every possible number ordered
         String allNumsOrdered = "";
         for (int i = lowestNumber; i <= highestNumber; i++){
+            numbersInString.add(i);
             allNumsOrdered += Integer.toString(i);
         }
 
@@ -66,9 +125,11 @@ public class Main {
     }
 
     public Main(String missingNumberString, int low, int high){
-        this.missingNumberString = missingNumberString;
+        this.missingNumberStrings = new ArrayList<>();
+        this.missingNumberStrings.add(missingNumberString);
         this.lowestNumber = low;
         this.highestNumber = high;
+        numbersInString = new ArrayList<Integer>();
     }
 
     public static void main(String[] args){
@@ -101,7 +162,7 @@ public class Main {
         // Get every possible combination of the number
         PermutationEngine engine = new PermutationEngine(tempStr);
         mainObj.setPossibleMissingNumbers(engine.getPermutations());
-        mainObj.getPossibleMissingNumbers();
+        int missingNumber = mainObj.findThatShizzzzzz();
 
 //        String[] missingNumberStrings = {input1, input2, input3, input4};
 //        for (String tempStr : missingNumberStrings){
