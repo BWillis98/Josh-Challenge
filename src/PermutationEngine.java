@@ -32,8 +32,6 @@ public class PermutationEngine {
 		 * 3. Invokes the process method, passing in the sorted char array
 		 */
         char[] inputCharArray = stringToPermutate.toCharArray();
-        System.out.println("Input: " + stringToPermutate + " just became: ");
-        for (char x : inputCharArray){System.out.println(x);}
         Arrays.sort(inputCharArray);
         do {
             inputCharArray = process(inputCharArray);
@@ -52,8 +50,11 @@ public class PermutationEngine {
 		 *
 		 * 3. Return the Input array
 		 */
-        System.out.println(input.toString());
-        permutations.add(input.toString());
+		String tempStr = "";
+		for (char ch : input){
+		    tempStr += ch;
+        }
+        permutations.add(tempStr);
         // Searches for a time where a char is greater than the one to its left
         for (int i = input.length - 1; i > 0; i--) {
             if (input[i] > input[i - 1]) {

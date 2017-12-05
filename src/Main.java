@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -98,12 +99,9 @@ public class Main {
         }
 
         // Get every possible combination of the number
-        System.out.println(tempStr);
         PermutationEngine engine = new PermutationEngine(tempStr);
         mainObj.setPossibleMissingNumbers(engine.getPermutations());
-        for(int i : mainObj.getPossibleMissingNumbers()){
-            System.out.print(i);
-        }
+        mainObj.getPossibleMissingNumbers()
 
 //        String[] missingNumberStrings = {input1, input2, input3, input4};
 //        for (String tempStr : missingNumberStrings){
