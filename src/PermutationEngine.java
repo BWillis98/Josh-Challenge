@@ -15,7 +15,11 @@ public class PermutationEngine {
     public ArrayList<Integer> getPermutations() {
         ArrayList<Integer> arr = new ArrayList<>();
         for (String str : permutations){
-            arr.add(Integer.parseInt(str));
+            try{
+                arr.add(Integer.parseInt(str));
+            }catch(NumberFormatException ex){
+                throw new NumberFormatException(str + " is not in the correct format or is not a number.");
+            }
         }
         return arr;
     }
