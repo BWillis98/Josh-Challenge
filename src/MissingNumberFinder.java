@@ -8,11 +8,6 @@ public class MissingNumberFinder {
     private ArrayList<Integer> numbersInString, possibleMissingNumbers;
     private int lowestNumber, highestNumber;
 
-    public ArrayList<Integer> getPossibleMissingNumbers() {
-        return possibleMissingNumbers;
-    }
-
-
     public int findThatShizzzzzz(){
         int majorCoutner = 0;
         while (majorCoutner < 50){
