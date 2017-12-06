@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -132,12 +133,13 @@ public class MissingNumberFinder {
     }
 
     public void setPossibleMissingNumbers(ArrayList<Integer> arrayList){
+        ArrayList<Integer> validNumbers = new ArrayList<Integer>();
         for (int i : arrayList){
-            if (i > highestNumber || i < lowestNumber){
-                arrayList.remove(i);
+            if (i <= highestNumber && i >= lowestNumber){
+                validNumbers.add(i);
             }
         }
-        possibleMissingNumbers = arrayList;
+        possibleMissingNumbers = validNumbers;
     }
 
     public MissingNumberFinder(String missingNumberString, int low, int high){
