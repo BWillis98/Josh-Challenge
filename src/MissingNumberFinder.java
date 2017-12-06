@@ -66,26 +66,23 @@ public class MissingNumberFinder {
                 }
             }
 
-            boolean found = false;
-
-            // Loop through possible numbers.
             for (int j = 0; j < possibleMissingNumbers.size(); j++){
                 int number = possibleMissingNumbers.get(j);
-                // If that number is found, flag it as found.
-                for (int i = 0; i < missingNumberStrings.size(); i++){
-                    number = possibleMissingNumbers.get(j);
-                    if (missingNumberStrings.get(i).contains(Integer.toString(number))){
-                        found = true;
-                    }
-                }
-                // If that number was never found in any missing number strings, it's the number.
-                if (!found){
+                if(!stringIsInStrings(Integer.toString(number), missingNumberStrings)){
                     return number;
                 }
             }
-
         }
-        return possibleMissingNumbers.get(0);
+        return -1;
+    }
+
+    private boolean stringIsInStrings(String string, ArrayList<String> strings){
+        for (String str : strings){
+            if (str.contains(string)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public ArrayList<Integer> getMissingDigits(String missingNumberString){
